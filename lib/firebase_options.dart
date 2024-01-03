@@ -44,19 +44,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'my_apikey',
-    appId: '1:191749860979:web:14430e937c48db31b0c406',
+    apiKey: 'AIzaSyCT4r8uVyMYUnVs8JZVuyIICMo6eaqnUyE',
+    appId: '1:191749860979:web:cc0ea8b90d234704b0c406',
     messagingSenderId: '191749860979',
     projectId: 'chat-b06e1',
     authDomain: 'chat-b06e1.firebaseapp.com',
     databaseURL: 'https://chat-b06e1-default-rtdb.firebaseio.com',
     storageBucket: 'chat-b06e1.appspot.com',
-    measurementId: 'G-DX5R15HV2K',
+    measurementId: 'G-Y7S6WGTN7R',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'my_apikey',
-    appId: '1:191749860979:android:502972fd0aee14c0b0c406',
+    apiKey: 'AIzaSyBr8iY0btsmlH8Ri97cv76oHj39G65RXlg',
+    appId: '1:191749860979:android:0fa41b8001e2b2c1b0c406',
     messagingSenderId: '191749860979',
     projectId: 'chat-b06e1',
     databaseURL: 'https://chat-b06e1-default-rtdb.firebaseio.com',
@@ -64,8 +64,8 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'my_apikey',
-    appId: '1:191749860979:ios:33c99b2cd700c6aab0c406',
+    apiKey: 'AIzaSyCIebL6zrEqu3n_sOv-2UEwzWjZGtLA8hM',
+    appId: '1:191749860979:ios:577c67761294c3f1b0c406',
     messagingSenderId: '191749860979',
     projectId: 'chat-b06e1',
     databaseURL: 'https://chat-b06e1-default-rtdb.firebaseio.com',
@@ -76,8 +76,8 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'my_apikey',
-    appId: '1:191749860979:ios:33c99b2cd700c6aab0c406',
+    apiKey: 'AIzaSyCIebL6zrEqu3n_sOv-2UEwzWjZGtLA8hM',
+    appId: '1:191749860979:ios:577c67761294c3f1b0c406',
     messagingSenderId: '191749860979',
     projectId: 'chat-b06e1',
     databaseURL: 'https://chat-b06e1-default-rtdb.firebaseio.com',

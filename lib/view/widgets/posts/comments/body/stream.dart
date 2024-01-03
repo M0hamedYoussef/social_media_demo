@@ -1,9 +1,10 @@
-import 'package:social_media_demo/controller/posts/comments_con.dart';
-import 'package:social_media_demo/models/comments_model.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/body/streamfiles/comment/comment_text.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/body/streamfiles/comment_body.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/body/streamfiles/decoration/comment_bottom_bar.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/body/streamfiles/decoration/comment_upper_bar.dart';
+import 'package:sm_project/controller/posts/comments_con.dart';
+import 'package:sm_project/core/const/colors.dart';
+import 'package:sm_project/models/comments_model.dart';
+import 'package:sm_project/view/widgets/posts/comments/body/streamfiles/comment/comment_text.dart';
+import 'package:sm_project/view/widgets/posts/comments/body/streamfiles/comment_body.dart';
+import 'package:sm_project/view/widgets/posts/comments/body/streamfiles/decoration/comment_bottom_bar.dart';
+import 'package:sm_project/view/widgets/posts/comments/body/streamfiles/decoration/comment_upper_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -63,7 +64,7 @@ class CommentsStream extends GetView<CommentsCon> {
                 height: MediaQuery.of(context).size.height / 15,
                 width: MediaQuery.of(context).size.width / 15,
                 child: const CircularProgressIndicator(
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
             );

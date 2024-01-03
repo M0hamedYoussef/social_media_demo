@@ -1,6 +1,7 @@
 import 'dart:io';
-import 'package:social_media_demo/core/services/my_services.dart';
-import 'package:social_media_demo/routes.dart';
+import 'package:sm_project/core/const/colors.dart';
+import 'package:sm_project/core/services/my_services.dart';
+import 'package:sm_project/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -113,22 +114,22 @@ class LoginCon extends GetxController {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16),
                                 borderSide:
-                                    const BorderSide(color: Colors.black),
+                                    const BorderSide(color: AppColors.black),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16),
                                 borderSide:
-                                    const BorderSide(color: Colors.black),
+                                    const BorderSide(color: AppColors.black),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16),
                                 borderSide:
-                                    const BorderSide(color: Colors.black),
+                                    const BorderSide(color: AppColors.black),
                               ),
                               label: const Text(
                                 'username',
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.black),
+                                    fontSize: 15, color: AppColors.black),
                               ),
                               hintText: "Enter Your Username",
                             ),
@@ -140,8 +141,8 @@ class LoginCon extends GetxController {
                               width: double.infinity,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black,
-                                  foregroundColor: Colors.black,
+                                  backgroundColor: AppColors.black,
+                                  foregroundColor: AppColors.black,
                                   elevation: 4,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
@@ -173,7 +174,8 @@ class LoginCon extends GetxController {
                                                     ? const Center(
                                                         child:
                                                             CircularProgressIndicator(
-                                                          color: Colors.black,
+                                                          color:
+                                                              AppColors.black,
                                                         ),
                                                       )
                                                     : CircleAvatar(
@@ -186,7 +188,7 @@ class LoginCon extends GetxController {
                                                                   ),
                                                         radius: 100,
                                                         backgroundColor:
-                                                            Colors.black,
+                                                            AppColors.black,
                                                       ),
                                               ),
                                             ),
@@ -198,14 +200,14 @@ class LoginCon extends GetxController {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 MaterialButton(
-                                                  color: Colors.black,
+                                                  color: AppColors.black,
                                                   onPressed: () {
                                                     uploadPFP();
                                                   },
                                                   child: const Text(
                                                     'Upload Image',
                                                     style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: AppColors.white,
                                                     ),
                                                   ),
                                                 ),
@@ -215,7 +217,7 @@ class LoginCon extends GetxController {
                                                 GetBuilder<LoginCon>(
                                                   builder: (con) =>
                                                       MaterialButton(
-                                                    color: Colors.black,
+                                                    color: AppColors.black,
                                                     onPressed: () async {
                                                       if (buttonText ==
                                                           'Not Now') {
@@ -269,7 +271,7 @@ class LoginCon extends GetxController {
                                                     child: Text(
                                                       buttonText,
                                                       style: const TextStyle(
-                                                        color: Colors.white,
+                                                        color: AppColors.white,
                                                       ),
                                                     ),
                                                   ),
@@ -311,7 +313,7 @@ class LoginCon extends GetxController {
                                 },
                                 child: const Text(
                                   'Submit',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: AppColors.white),
                                 ),
                               ),
                             ),
@@ -338,22 +340,22 @@ class LoginCon extends GetxController {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16),
                                 borderSide:
-                                    const BorderSide(color: Colors.black),
+                                    const BorderSide(color: AppColors.black),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16),
                                 borderSide:
-                                    const BorderSide(color: Colors.black),
+                                    const BorderSide(color: AppColors.black),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16),
                                 borderSide:
-                                    const BorderSide(color: Colors.black),
+                                    const BorderSide(color: AppColors.black),
                               ),
                               label: const Text(
                                 'username',
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.black),
+                                    fontSize: 15, color: AppColors.black),
                               ),
                               hintText: "Enter Your Username",
                             ),
@@ -365,8 +367,8 @@ class LoginCon extends GetxController {
                               width: double.infinity,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black,
-                                  foregroundColor: Colors.black,
+                                  backgroundColor: AppColors.black,
+                                  foregroundColor: AppColors.black,
                                   elevation: 4,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
@@ -420,7 +422,7 @@ class LoginCon extends GetxController {
                                 },
                                 child: const Text(
                                   'Submit',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: AppColors.white),
                                 ),
                               ),
                             ),
@@ -443,7 +445,7 @@ class LoginCon extends GetxController {
                           child: isUploading
                               ? const Center(
                                   child: CircularProgressIndicator(
-                                    color: Colors.black,
+                                    color: AppColors.black,
                                   ),
                                 )
                               : CircleAvatar(
@@ -453,7 +455,7 @@ class LoginCon extends GetxController {
                                           'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg',
                                         ),
                                   radius: 100,
-                                  backgroundColor: Colors.black,
+                                  backgroundColor: AppColors.black,
                                 ),
                         ),
                       ),
@@ -464,14 +466,14 @@ class LoginCon extends GetxController {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           MaterialButton(
-                            color: Colors.black,
+                            color: AppColors.black,
                             onPressed: () {
                               uploadPFP();
                             },
                             child: const Text(
                               'Upload Image',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -480,7 +482,7 @@ class LoginCon extends GetxController {
                           ),
                           GetBuilder<LoginCon>(
                             builder: (con) => MaterialButton(
-                              color: Colors.black,
+                              color: AppColors.black,
                               onPressed: () async {
                                 if (buttonText == 'Not Now') {
                                   await users.doc(docid).update(
@@ -507,7 +509,7 @@ class LoginCon extends GetxController {
                               child: Text(
                                 buttonText,
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.white,
                                 ),
                               ),
                             ),
@@ -557,10 +559,10 @@ class LoginCon extends GetxController {
     Get.defaultDialog(
       title: '',
       content: Container(
-        color: Colors.white,
+        color: AppColors.white,
         child: const Center(
           child: CircularProgressIndicator(
-            color: Colors.black,
+            color: AppColors.darkBlue1,
           ),
         ),
       ),
@@ -588,6 +590,7 @@ class LoginCon extends GetxController {
                     'UserName': null,
                     'pfp': null,
                     'lastmess': null,
+                    'friends': [],
                     'lastdate': null,
                     'token': await token,
                   },
@@ -612,23 +615,23 @@ class LoginCon extends GetxController {
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
-                                      borderSide:
-                                          const BorderSide(color: Colors.black),
+                                      borderSide: const BorderSide(
+                                          color: AppColors.black),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
-                                      borderSide:
-                                          const BorderSide(color: Colors.black),
+                                      borderSide: const BorderSide(
+                                          color: AppColors.black),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
-                                      borderSide:
-                                          const BorderSide(color: Colors.black),
+                                      borderSide: const BorderSide(
+                                          color: AppColors.black),
                                     ),
                                     label: const Text(
                                       'username',
                                       style: TextStyle(
-                                          fontSize: 15, color: Colors.black),
+                                          fontSize: 15, color: AppColors.black),
                                     ),
                                     hintText: "Enter Your Username",
                                   ),
@@ -641,8 +644,8 @@ class LoginCon extends GetxController {
                                     width: double.infinity,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.black,
-                                        foregroundColor: Colors.black,
+                                        backgroundColor: AppColors.black,
+                                        foregroundColor: AppColors.black,
                                         elevation: 4,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -680,8 +683,8 @@ class LoginCon extends GetxController {
                                                           ? const Center(
                                                               child:
                                                                   CircularProgressIndicator(
-                                                                color: Colors
-                                                                    .black,
+                                                                color: AppColors
+                                                                    .darkBlue1,
                                                               ),
                                                             )
                                                           : CircleAvatar(
@@ -694,7 +697,8 @@ class LoginCon extends GetxController {
                                                                     ),
                                                               radius: 100,
                                                               backgroundColor:
-                                                                  Colors.black,
+                                                                  AppColors
+                                                                      .black,
                                                             ),
                                                     ),
                                                   ),
@@ -707,14 +711,15 @@ class LoginCon extends GetxController {
                                                             .center,
                                                     children: [
                                                       MaterialButton(
-                                                        color: Colors.black,
+                                                        color: AppColors.black,
                                                         onPressed: () {
                                                           uploadPFP();
                                                         },
                                                         child: const Text(
                                                           'Upload Image',
                                                           style: TextStyle(
-                                                            color: Colors.white,
+                                                            color:
+                                                                AppColors.white,
                                                           ),
                                                         ),
                                                       ),
@@ -724,7 +729,8 @@ class LoginCon extends GetxController {
                                                       GetBuilder<LoginCon>(
                                                         builder: (con) =>
                                                             MaterialButton(
-                                                          color: Colors.black,
+                                                          color:
+                                                              AppColors.black,
                                                           onPressed: () async {
                                                             if (buttonText ==
                                                                 'Not Now') {
@@ -776,8 +782,8 @@ class LoginCon extends GetxController {
                                                             buttonText,
                                                             style:
                                                                 const TextStyle(
-                                                              color:
-                                                                  Colors.white,
+                                                              color: AppColors
+                                                                  .white,
                                                             ),
                                                           ),
                                                         ),
@@ -824,7 +830,8 @@ class LoginCon extends GetxController {
                                       },
                                       child: const Text(
                                         'Submit',
-                                        style: TextStyle(color: Colors.white),
+                                        style:
+                                            TextStyle(color: AppColors.white),
                                       ),
                                     ),
                                   ),
@@ -879,22 +886,23 @@ class LoginCon extends GetxController {
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(16),
                                         borderSide: const BorderSide(
-                                            color: Colors.black),
+                                            color: AppColors.black),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(16),
                                         borderSide: const BorderSide(
-                                            color: Colors.black),
+                                            color: AppColors.black),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(16),
                                         borderSide: const BorderSide(
-                                            color: Colors.black),
+                                            color: AppColors.black),
                                       ),
                                       label: const Text(
                                         'username',
                                         style: TextStyle(
-                                            fontSize: 15, color: Colors.black),
+                                            fontSize: 15,
+                                            color: AppColors.black),
                                       ),
                                       hintText: "Enter Your Username",
                                     ),
@@ -907,8 +915,8 @@ class LoginCon extends GetxController {
                                       width: double.infinity,
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.black,
-                                          foregroundColor: Colors.black,
+                                          backgroundColor: AppColors.black,
+                                          foregroundColor: AppColors.black,
                                           elevation: 4,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -977,15 +985,16 @@ class LoginCon extends GetxController {
                                                               .center,
                                                       children: [
                                                         MaterialButton(
-                                                          color: Colors.black,
+                                                          color:
+                                                              AppColors.black,
                                                           onPressed: () {
                                                             uploadPFP();
                                                           },
                                                           child: const Text(
                                                             'Upload Image',
                                                             style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
+                                                              color: AppColors
+                                                                  .white,
                                                             ),
                                                           ),
                                                         ),
@@ -995,7 +1004,8 @@ class LoginCon extends GetxController {
                                                         GetBuilder<LoginCon>(
                                                           builder: (con) =>
                                                               MaterialButton(
-                                                            color: Colors.black,
+                                                            color:
+                                                                AppColors.black,
                                                             onPressed:
                                                                 () async {
                                                               if (buttonText ==
@@ -1098,7 +1108,8 @@ class LoginCon extends GetxController {
                                         },
                                         child: const Text(
                                           'Submit',
-                                          style: TextStyle(color: Colors.white),
+                                          style:
+                                              TextStyle(color: AppColors.white),
                                         ),
                                       ),
                                     ),
@@ -1126,22 +1137,23 @@ class LoginCon extends GetxController {
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(16),
                                         borderSide: const BorderSide(
-                                            color: Colors.black),
+                                            color: AppColors.black),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(16),
                                         borderSide: const BorderSide(
-                                            color: Colors.black),
+                                            color: AppColors.black),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(16),
                                         borderSide: const BorderSide(
-                                            color: Colors.black),
+                                            color: AppColors.black),
                                       ),
                                       label: const Text(
                                         'username',
                                         style: TextStyle(
-                                            fontSize: 15, color: Colors.black),
+                                            fontSize: 15,
+                                            color: AppColors.black),
                                       ),
                                       hintText: "Enter Your Username",
                                     ),
@@ -1154,8 +1166,8 @@ class LoginCon extends GetxController {
                                       width: double.infinity,
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.black,
-                                          foregroundColor: Colors.black,
+                                          backgroundColor: AppColors.black,
+                                          foregroundColor: AppColors.black,
                                           elevation: 4,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -1220,7 +1232,8 @@ class LoginCon extends GetxController {
                                         },
                                         child: const Text(
                                           'Submit',
-                                          style: TextStyle(color: Colors.white),
+                                          style:
+                                              TextStyle(color: AppColors.white),
                                         ),
                                       ),
                                     ),
@@ -1245,7 +1258,7 @@ class LoginCon extends GetxController {
                                   child: isUploading
                                       ? const Center(
                                           child: CircularProgressIndicator(
-                                            color: Colors.black,
+                                            color: AppColors.black,
                                           ),
                                         )
                                       : CircleAvatar(
@@ -1255,7 +1268,7 @@ class LoginCon extends GetxController {
                                                   'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg',
                                                 ),
                                           radius: 100,
-                                          backgroundColor: Colors.black,
+                                          backgroundColor: AppColors.black,
                                         ),
                                 ),
                               ),
@@ -1266,14 +1279,14 @@ class LoginCon extends GetxController {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   MaterialButton(
-                                    color: Colors.black,
+                                    color: AppColors.black,
                                     onPressed: () {
                                       uploadPFP();
                                     },
                                     child: const Text(
                                       'Upload Image',
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: AppColors.white,
                                       ),
                                     ),
                                   ),
@@ -1282,7 +1295,7 @@ class LoginCon extends GetxController {
                                   ),
                                   GetBuilder<LoginCon>(
                                     builder: (con) => MaterialButton(
-                                      color: Colors.black,
+                                      color: AppColors.black,
                                       onPressed: () async {
                                         if (buttonText == 'Not Now') {
                                           await users.doc(docid).update(
@@ -1308,7 +1321,7 @@ class LoginCon extends GetxController {
                                       child: Text(
                                         buttonText,
                                         style: const TextStyle(
-                                          color: Colors.white,
+                                          color: AppColors.white,
                                         ),
                                       ),
                                     ),

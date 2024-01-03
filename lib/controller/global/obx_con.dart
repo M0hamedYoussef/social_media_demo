@@ -4,21 +4,18 @@ import 'package:get/get.dart';
 class ObxCon extends GetxController {
   RxBool emoji = false.obs;
   TextEditingController mess = TextEditingController();
-  FocusNode f = FocusNode();
-  String? mtcheck = ''; //comments
-
-  changeemojivis() {
-    emoji.value = !emoji.value;
-    update();
-  }
+  FocusNode textFormFocus = FocusNode();
 
   @override
   void onInit() {
     super.onInit();
-    f.addListener(
+    textFormFocus.addListener(
       () {
-        if (f.hasFocus) {
+        if (textFormFocus.hasFocus) {
           emoji.value = false;
+          mess.selection = TextSelection.fromPosition(
+            TextPosition(offset: mess.text.length),
+          );
         }
       },
     );
@@ -27,7 +24,15 @@ class ObxCon extends GetxController {
   @override
   void onClose() {
     mess.dispose();
-    mtcheck = '';
     super.onClose();
+  }
+
+  changeemojivis() {
+    if (emoji.value) {
+      textFormFocus.requestFocus();
+    } else {
+      textFormFocus.unfocus();
+    }
+    emoji.value = !emoji.value;
   }
 }

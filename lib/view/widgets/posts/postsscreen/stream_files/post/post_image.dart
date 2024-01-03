@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:social_media_demo/models/post_model.dart';
-import 'package:social_media_demo/view/screens/media/image/imagescreen.dart';
+import 'package:sm_project/core/const/colors.dart';
+import 'package:sm_project/models/post_model.dart';
+import 'package:sm_project/view/screens/main/media/image/imagescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +31,7 @@ class PostImage extends StatelessWidget {
           )
         : const Center(
             child: CircularProgressIndicator(
-              color: Colors.black,
+              color: AppColors.black,
             ),
           );
   }

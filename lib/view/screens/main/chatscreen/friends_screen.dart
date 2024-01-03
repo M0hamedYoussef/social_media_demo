@@ -1,6 +1,7 @@
-import 'package:social_media_demo/controller/chat/friends_con.dart';
-import 'package:social_media_demo/view/widgets/chat/private_chats/app_bar.dart';
-import 'package:social_media_demo/view/widgets/chat/private_chats/stream.dart';
+import 'package:sm_project/controller/chat/colors_controller.dart';
+import 'package:sm_project/controller/chat/friends_con.dart';
+import 'package:sm_project/view/widgets/chat/private_chats/app_bar.dart';
+import 'package:sm_project/view/widgets/chat/private_chats/stream.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,14 +11,11 @@ class PrivateFriends extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FriendsCon friendsCon = Get.put(FriendsCon());
-    return Scaffold(
-      appBar: privatesAppBar(),
-      body: WillPopScope(
-        onWillPop: () {
-          Get.back();
-          return Future.value(false);
-        },
-        child: PrivatesStream(myUid: friendsCon.myUid),
+    Get.put(ColorsController());
+    return GetBuilder<ColorsController>(
+      builder: (cC) => Scaffold(
+        appBar: privatesAppBar(),
+        body: PrivatesStream(myUid: friendsCon.myUid),
       ),
     );
   }

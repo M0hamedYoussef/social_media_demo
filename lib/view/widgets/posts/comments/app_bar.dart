@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 PreferredSizeWidget commentsAppBar() {
   return AppBar(
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.white,
     title: const Text(
       'Comments',
-      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      style: TextStyle(color: AppColors.black, fontWeight: FontWeight.bold),
     ),
     leading: GestureDetector(
       onTap: () {
@@ -14,7 +15,7 @@ PreferredSizeWidget commentsAppBar() {
       },
       child: const Icon(
         Icons.arrow_back,
-        color: Colors.black,
+        color: AppColors.black,
       ),
     ),
   );

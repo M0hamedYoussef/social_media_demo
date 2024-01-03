@@ -31,7 +31,10 @@ class ChatModel {
   String? repliedTo;
   String? repliedImg;
   String? repliedVid;
+  String? voice;
+  bool? isVoiceUploaded;
   int? repliedMessID;
+  String? duration;
 
   ChatModel({
     this.data,
@@ -64,6 +67,9 @@ class ChatModel {
     this.repliedImg,
     this.repliedVid,
     this.repliedMessID,
+    this.voice,
+    this.duration,
+    this.isVoiceUploaded,
   });
 
   ChatModel.fromMap(Map<String, dynamic> snapshot) {
@@ -98,5 +104,10 @@ class ChatModel {
     repliedImg = snapshot['repliedImg'];
     repliedVid = snapshot['repliedVid'];
     repliedMessID = snapshot['repliedMessID'];
+    voice = snapshot.containsKey('voice') ? snapshot['voice'] : null;
+    duration = snapshot.containsKey('duration') ? snapshot['duration'] : null;
+    isVoiceUploaded = snapshot.containsKey('isVoiceUploaded')
+        ? snapshot['isVoiceUploaded']
+        : null;
   }
 }

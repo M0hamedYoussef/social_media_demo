@@ -1,7 +1,7 @@
-import 'package:social_media_demo/controller/chat/privatemess_con.dart';
-import 'package:social_media_demo/controller/global/app_con.dart';
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/models/chat_model.dart';
+import 'package:sm_project/controller/chat/privatemess_con.dart';
+import 'package:sm_project/controller/global/app_con.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/models/chat_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swipe_to/swipe_to.dart';
@@ -12,11 +12,15 @@ class TextMessageFriend extends GetView<PrivateChatsCon> {
     required this.chatModel,
     required this.myUid,
     required this.friendUid,
+    required this.friendPfp,
+    required this.friendName,
     required this.docID,
     required this.fun,
   });
   final String myUid;
   final String friendUid;
+  final String friendPfp;
+  final String friendName;
   final String docID;
   final ChatModel chatModel;
   final Function fun;
@@ -30,7 +34,7 @@ class TextMessageFriend extends GetView<PrivateChatsCon> {
             onRightSwipe: () {
               controller.toLANG = chatModel.messLANG;
               controller.reply = appCon.replyMess(
-                chatModel.userName!,
+                friendName,
                 chatModel.message!,
                 fun,
                 myLANG: chatModel.messLANG,
@@ -38,7 +42,7 @@ class TextMessageFriend extends GetView<PrivateChatsCon> {
 
               langCon.update();
               controller.replied = true;
-              controller.repliedTO = chatModel.userName!;
+              controller.repliedTO = friendName;
               controller.repliedMess = chatModel.message!;
               controller.repliedMessID = chatModel.messageID;
               controller.toType = 'Text';
@@ -47,8 +51,8 @@ class TextMessageFriend extends GetView<PrivateChatsCon> {
               chatModel.dateString!,
               docID,
               chatModel.message!,
-              chatModel.profilePicture!,
-              chatModel.userName!,
+              friendPfp,
+              friendName,
               chatModel.message!,
               false,
               true,
@@ -67,14 +71,14 @@ class TextMessageFriend extends GetView<PrivateChatsCon> {
                       onRightSwipe: () {
                         controller.toType = chatModel.messLANG;
                         controller.reply = appCon.replyMess(
-                          chatModel.userName!,
+                          friendName,
                           chatModel.message!,
                           fun,
                           myLANG: chatModel.messLANG,
                         );
                         langCon.update();
                         controller.replied = true;
-                        controller.repliedTO = chatModel.userName!;
+                        controller.repliedTO = friendName;
                         controller.repliedMess = chatModel.message!;
                         controller.repliedMessID = chatModel.messageID;
                         controller.toType = 'Text';
@@ -84,7 +88,7 @@ class TextMessageFriend extends GetView<PrivateChatsCon> {
                           Opacity(
                             opacity: 0.9,
                             child: appCon.buildReplyMess(
-                              chatModel.userName!,
+                              friendName,
                               chatModel.repliedTo!,
                               chatModel.repliedMessage!,
                               false,
@@ -95,8 +99,8 @@ class TextMessageFriend extends GetView<PrivateChatsCon> {
                             chatModel.dateString!,
                             docID,
                             chatModel.message!,
-                            chatModel.profilePicture!,
-                            chatModel.userName!,
+                            friendPfp,
+                            friendName,
                             chatModel.message!,
                             false,
                             true,
@@ -119,14 +123,14 @@ class TextMessageFriend extends GetView<PrivateChatsCon> {
                           onRightSwipe: () {
                             controller.toLANG = chatModel.messLANG;
                             controller.reply = appCon.replyMess(
-                              chatModel.userName!,
+                              friendName,
                               chatModel.message!,
                               fun,
                               myLANG: chatModel.messLANG,
                             );
                             langCon.update();
                             controller.replied = true;
-                            controller.repliedTO = chatModel.userName!;
+                            controller.repliedTO = friendName;
                             controller.repliedMess = chatModel.message!;
                             controller.repliedMessID = chatModel.messageID;
                             controller.toType = 'Text';
@@ -134,7 +138,7 @@ class TextMessageFriend extends GetView<PrivateChatsCon> {
                           child: Column(
                             children: [
                               appCon.buildReplyImage(
-                                chatModel.userName!,
+                                friendName,
                                 chatModel.repliedTo!,
                                 chatModel.repliedImg!,
                                 false,
@@ -143,8 +147,8 @@ class TextMessageFriend extends GetView<PrivateChatsCon> {
                                 chatModel.dateString!,
                                 docID,
                                 chatModel.message!,
-                                chatModel.profilePicture!,
-                                chatModel.userName!,
+                                friendPfp,
+                                friendName,
                                 chatModel.message!,
                                 false,
                                 true,

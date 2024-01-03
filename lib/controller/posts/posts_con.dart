@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:social_media_demo/controller/global/app_con.dart';
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/controller/global/notify_con.dart';
-import 'package:social_media_demo/models/post_model.dart';
-import 'package:social_media_demo/view/screens/media/video/videoscreen.dart';
+import 'package:sm_project/controller/global/app_con.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/controller/global/notify_con.dart';
+import 'package:sm_project/core/services/my_services.dart';
+import 'package:sm_project/models/post_model.dart';
+import 'package:sm_project/view/screens/main/media/video/videoscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,11 +20,18 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 AppCon _appCon = Get.put(AppCon());
 LangCon _langCon = Get.put(LangCon());
 NotifyCon _notifyCon = Get.put(NotifyCon());
+MyServices _myServices = Get.find();
 
 class PostsCon extends GetxController {
   @override
-  void onInit() {
-    _appCon.getInfo();
+  onInit() async {
+    if (_myServices.mySharedPrefs.getString('username') != null &&
+        _myServices.mySharedPrefs.getString('pfp') != null) {
+      _appCon.name = _myServices.mySharedPrefs.getString('username');
+      _appCon.pfp = _myServices.mySharedPrefs.getString('pfp');
+    } else {
+      await _appCon.getInfo();
+    }
     _notifyCon.initMess();
     super.onInit();
   }
@@ -70,11 +77,9 @@ class PostsCon extends GetxController {
   }
 
   formatDate({required PostModel postModel}) {
-    String formated = DateFormat('y-M-d h:mm a').format(
-      DateTime.parse(
-        postModel.dateString!,
-      ),
-    );
+    String formated = DateTime.parse(
+      postModel.dateString!,
+    ).toString();
     return formated;
   }
 

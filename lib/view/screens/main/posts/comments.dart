@@ -1,8 +1,8 @@
-import 'package:social_media_demo/controller/posts/comments_con.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/app_bar.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/body/emojis.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/textform/full_row.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/body/stream.dart';
+import 'package:sm_project/controller/posts/comments_con.dart';
+import 'package:sm_project/view/widgets/posts/comments/app_bar.dart';
+import 'package:sm_project/view/widgets/posts/comments/body/emojis.dart';
+import 'package:sm_project/view/widgets/posts/comments/textform/full_row.dart';
+import 'package:sm_project/view/widgets/posts/comments/body/stream.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

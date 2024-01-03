@@ -1,10 +1,11 @@
-import 'package:social_media_demo/controller/global/app_con.dart';
-import 'package:social_media_demo/routes.dart';
+import 'package:sm_project/controller/global/app_con.dart';
+import 'package:sm_project/core/const/api_keys.dart';
+import 'package:sm_project/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 AppCon _appCon = Get.put(AppCon());
 
@@ -16,7 +17,7 @@ class NotifyCon extends GetxController {
   }
 
   late String myToken;
-  String serverToken = 'my_token';
+  String serverToken = ApiKeys.fcmApiKey;
 
   sendNotification({
     required String title,
@@ -186,6 +187,7 @@ class NotifyCon extends GetxController {
   }
 
   onMessageOpen() async {
+    // when app is opened
     FirebaseMessaging.onMessage.listen(
       (message) async {
         if (message.data['private'] == 'true') {
@@ -240,6 +242,7 @@ class NotifyCon extends GetxController {
     );
 
     FirebaseMessaging.onMessageOpenedApp.listen(
+      // in background
       (message) {
         if (message.data['private'] == 'true') {
           Get.toNamed(
@@ -267,8 +270,10 @@ class NotifyCon extends GetxController {
   }
 
   initMess() async {
+    // closed
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
+
     if (initialMessage != null) {
       if (initialMessage.data['private'] == 'true') {
         Get.toNamed(

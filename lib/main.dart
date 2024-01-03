@@ -1,16 +1,19 @@
-import 'package:social_media_demo/binding/my_bind.dart';
-import 'package:social_media_demo/core/services/my_services.dart';
-import 'package:social_media_demo/routes.dart';
+import 'package:sm_project/binding/my_bind.dart';
+import 'package:sm_project/controller/global/notify_con.dart';
+import 'package:sm_project/core/functions/check_connection.dart';
+import 'package:sm_project/core/services/my_services.dart';
+import 'package:sm_project/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_media_demo/controller/global/notify_con.dart';
 
 NotifyCon _noti = Get.put(NotifyCon());
-
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await checkInternet();
   await initService();
-  await _noti.onMessageOpen();
+  if (onlineCheck) {
+    await _noti.onMessageOpen();
+  }
   runApp(const MyApp());
 }
 

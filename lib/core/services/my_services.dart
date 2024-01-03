@@ -1,16 +1,18 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:social_media_demo/firebase_options.dart';
+import 'package:sm_project/core/functions/check_connection.dart';
+import 'package:sm_project/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class MyServices extends GetxService {
   late SharedPreferences mySharedPrefs;
-  Stream? oneStream;
 
   Future<MyServices> init() async {
     mySharedPrefs = await SharedPreferences.getInstance();
-    await firebaseINIT();
+    if (onlineCheck) {
+      await firebaseINIT();
+    }
     return this;
   }
 

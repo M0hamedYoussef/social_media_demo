@@ -1,5 +1,6 @@
-import 'package:social_media_demo/core/services/my_services.dart';
-import 'package:social_media_demo/routes.dart';
+import 'package:sm_project/core/functions/check_connection.dart';
+import 'package:sm_project/core/services/my_services.dart';
+import 'package:sm_project/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,8 +12,12 @@ class AppMiddleware extends GetMiddleware {
 
   @override
   RouteSettings? redirect(String? route) {
-    if (myServices.mySharedPrefs.getBool('loged') == true) {
-      return const RouteSettings(name: AppRoutes.main);
+    if (onlineCheck) {
+      if (myServices.mySharedPrefs.getBool('loged') == true) {
+        return const RouteSettings(name: AppRoutes.main);
+      }
+    } else {
+      return const RouteSettings(name: AppRoutes.offline);
     }
     return null;
   }

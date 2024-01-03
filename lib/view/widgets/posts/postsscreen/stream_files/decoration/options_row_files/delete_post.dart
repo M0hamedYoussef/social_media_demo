@@ -1,6 +1,7 @@
-import 'package:social_media_demo/controller/posts/posts_con.dart';
+import 'package:sm_project/controller/posts/posts_con.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 class DeletePost extends StatelessWidget {
   const DeletePost({
@@ -11,6 +12,7 @@ class DeletePost extends StatelessWidget {
     required this.postStorageref,
     required this.postStoragerefVid,
     required this.postStoragerefThumb,
+    required this.openCloseDial,
   });
   final String myUid;
   final String postUserId;
@@ -18,35 +20,36 @@ class DeletePost extends StatelessWidget {
   final String? postStorageref;
   final String? postStoragerefVid;
   final String? postStoragerefThumb;
+  final ValueNotifier openCloseDial;
 
   @override
   Widget build(BuildContext context) {
     PostsCon postsCon = Get.put(PostsCon());
 
-    return myUid == postUserId
-        ? postId != null
-            ? GestureDetector(
-                onTap: () async {
-                  postsCon.deleteDoc(
-                    postId!,
-                  );
-                  if (postStorageref != null) {
-                    postsCon.deleteFile(
-                      postStorageref!,
-                    );
-                  }
-                  if (postStoragerefVid != null) {
-                    postsCon.deleteFile(
-                      postStoragerefVid!,
-                    );
-                    postsCon.deleteFile(
-                      postStoragerefThumb!,
-                    );
-                  }
-                },
-                child: const Icon(Icons.close),
-              )
-            : const SizedBox()
-        : const SizedBox();
+    return GestureDetector(
+      onTap: () async {
+        openCloseDial.value = !openCloseDial.value;
+        postsCon.deleteDoc(
+          postId!,
+        );
+        if (postStorageref != null) {
+          postsCon.deleteFile(
+            postStorageref!,
+          );
+        }
+        if (postStoragerefVid != null) {
+          postsCon.deleteFile(
+            postStoragerefVid!,
+          );
+          postsCon.deleteFile(
+            postStoragerefThumb!,
+          );
+        }
+      },
+      child: const Icon(
+        Icons.close,
+        color: AppColors.darkBlue1,
+      ),
+    );
   }
 }

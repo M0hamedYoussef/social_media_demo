@@ -1,7 +1,7 @@
-import 'package:social_media_demo/controller/chat/privatemess_con.dart';
-import 'package:social_media_demo/controller/global/app_con.dart';
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/models/chat_model.dart';
+import 'package:sm_project/controller/chat/privatemess_con.dart';
+import 'package:sm_project/controller/global/app_con.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/models/chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

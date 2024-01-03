@@ -1,6 +1,7 @@
-import 'package:social_media_demo/controller/auth/login_con.dart';
+import 'package:sm_project/controller/auth/login_con.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 class SignButton extends GetView<LoginCon> {
   const SignButton({super.key});
@@ -19,8 +20,8 @@ class SignButton extends GetView<LoginCon> {
         width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.black,
+            backgroundColor: AppColors.darkBlue,
+            foregroundColor: AppColors.darkBlue1,
             elevation: 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
@@ -34,10 +35,10 @@ class SignButton extends GetView<LoginCon> {
               Get.defaultDialog(
                 title: '',
                 content: Container(
-                  color: Colors.white,
+                  color: AppColors.white,
                   child: const Center(
                     child: CircularProgressIndicator(
-                      color: Colors.black,
+                      color: AppColors.black,
                     ),
                   ),
                 ),
@@ -51,7 +52,7 @@ class SignButton extends GetView<LoginCon> {
           },
           child: const Text(
             'Sign In',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: AppColors.white),
           ),
         ),
       ),

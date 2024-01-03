@@ -1,7 +1,8 @@
-import 'package:social_media_demo/controller/auth/login_con.dart';
-import 'package:social_media_demo/core/const/image_asset.dart';
+import 'package:sm_project/controller/auth/login_con.dart';
+import 'package:sm_project/core/const/image_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 class GoogleSignButton extends StatelessWidget {
   const GoogleSignButton({super.key});
@@ -17,8 +18,8 @@ class GoogleSignButton extends StatelessWidget {
         width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.white,
+            backgroundColor: AppColors.white,
+            foregroundColor: AppColors.white,
             elevation: 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
@@ -40,7 +41,7 @@ class GoogleSignButton extends StatelessWidget {
               ),
               const Text(
                 'Login With Google',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: AppColors.darkBlue1),
               ),
             ],
           ),

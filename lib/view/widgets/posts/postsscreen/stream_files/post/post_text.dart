@@ -1,4 +1,4 @@
-import 'package:social_media_demo/models/post_model.dart';
+import 'package:sm_project/models/post_model.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 

@@ -8,7 +8,7 @@ class ChatCustomColumn extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: const BoxDecoration(
-        color: Colors.transparent,
+        color: Colors.white,
       ),
       child: Column(
         children: children,

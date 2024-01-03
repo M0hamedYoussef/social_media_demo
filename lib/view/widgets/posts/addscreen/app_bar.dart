@@ -1,8 +1,9 @@
-import 'package:social_media_demo/controller/global/app_con.dart';
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/controller/global/notify_con.dart';
-import 'package:social_media_demo/controller/posts/posts_con.dart';
-import 'package:social_media_demo/view/screens/main/posts/posts.dart';
+import 'package:sm_project/controller/global/app_con.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/controller/global/notify_con.dart';
+import 'package:sm_project/controller/posts/posts_con.dart';
+import 'package:sm_project/core/const/colors.dart';
+import 'package:sm_project/view/screens/main/main/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ PreferredSizeWidget addPostsBar() {
       children: [
         Text(
           myName.toString(),
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(color: AppColors.black),
         ),
         IconButton(
           onPressed: () {
@@ -70,10 +71,10 @@ PreferredSizeWidget addPostsBar() {
                         onPressed: () {
                           Get.offAll(() => const MainScreen());
                         },
-                        color: Colors.black,
+                        color: AppColors.black,
                         child: const Text(
                           'Yes',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: AppColors.white),
                         ),
                       ),
                       const SizedBox(width: 15),
@@ -81,10 +82,10 @@ PreferredSizeWidget addPostsBar() {
                         onPressed: () {
                           Get.back();
                         },
-                        color: Colors.black,
+                        color: AppColors.black,
                         child: const Text(
                           'No',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: AppColors.white),
                         ),
                       ),
                     ],
@@ -115,10 +116,10 @@ PreferredSizeWidget addPostsBar() {
                         onPressed: () {
                           Get.offAll(() => const MainScreen());
                         },
-                        color: Colors.black,
+                        color: AppColors.black,
                         child: const Text(
                           'Yes',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: AppColors.white),
                         ),
                       ),
                       const SizedBox(width: 15),
@@ -126,10 +127,10 @@ PreferredSizeWidget addPostsBar() {
                         onPressed: () {
                           Get.back();
                         },
-                        color: Colors.black,
+                        color: AppColors.black,
                         child: const Text(
                           'No',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: AppColors.white),
                         ),
                       ),
                     ],
@@ -140,13 +141,13 @@ PreferredSizeWidget addPostsBar() {
           },
           icon: const Icon(
             Icons.add,
-            color: Colors.black,
+            color: AppColors.black,
           ),
         ),
       ],
     ),
     leading: CircleAvatar(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.black,
       radius: 24,
       backgroundImage: NetworkImage(myPFP!),
     ),

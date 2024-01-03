@@ -1,5 +1,5 @@
-import 'package:social_media_demo/core/const/decoration.dart';
-import 'package:social_media_demo/core/const/image_asset.dart';
+import 'package:sm_project/core/const/decoration.dart';
+import 'package:sm_project/core/const/image_asset.dart';
 import 'package:flutter/material.dart';
 
 class AppLogo extends StatelessWidget {

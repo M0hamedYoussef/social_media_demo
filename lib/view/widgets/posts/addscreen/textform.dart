@@ -1,8 +1,9 @@
 import 'dart:io';
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/controller/posts/posts_con.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/controller/posts/posts_con.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 class AddPostsTextForm extends StatelessWidget {
   const AddPostsTextForm({super.key});
@@ -25,13 +26,13 @@ class AddPostsTextForm extends StatelessWidget {
                   vertical: 5,
                 ),
                 border: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppColors.black),
                 ),
                 enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppColors.black),
                 ),
                 focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: AppColors.black),
                 ),
                 prefixIcon: Column(
                   children: [

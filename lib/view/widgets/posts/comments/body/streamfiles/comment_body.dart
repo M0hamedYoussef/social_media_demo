@@ -1,6 +1,6 @@
-import 'package:social_media_demo/models/comments_model.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/body/streamfiles/comment/comment_image.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/body/streamfiles/comment/comment_video.dart';
+import 'package:sm_project/models/comments_model.dart';
+import 'package:sm_project/view/widgets/posts/comments/body/streamfiles/comment/comment_image.dart';
+import 'package:sm_project/view/widgets/posts/comments/body/streamfiles/comment/comment_video.dart';
 import 'package:flutter/material.dart';
 
 class CommentBody extends StatelessWidget {

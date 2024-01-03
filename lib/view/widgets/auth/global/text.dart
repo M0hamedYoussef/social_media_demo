@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText({
@@ -20,6 +21,7 @@ class CustomText extends StatelessWidget {
           fontWeight: fontWeight,
           fontSize: size,
           height: 1.5,
+          color: AppColors.darkBlue1,
         ),
         textAlign: TextAlign.center,
       ),

@@ -1,4 +1,4 @@
-# social_media_demo
+# SMP
 
 A new Flutter project.
 

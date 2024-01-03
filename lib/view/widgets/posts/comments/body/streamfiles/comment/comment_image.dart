@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:social_media_demo/models/comments_model.dart';
+import 'package:sm_project/core/const/colors.dart';
+import 'package:sm_project/models/comments_model.dart';
 import 'package:flutter/material.dart';
 
 class CommentImage extends StatelessWidget {
@@ -15,7 +16,7 @@ class CommentImage extends StatelessWidget {
           )
         : const Center(
             child: CircularProgressIndicator(
-              color: Colors.black,
+              color: AppColors.black,
             ),
           );
   }

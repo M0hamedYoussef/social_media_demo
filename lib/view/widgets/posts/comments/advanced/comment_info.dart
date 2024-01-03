@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 class CommentInfoRow extends StatelessWidget {
-  const CommentInfoRow({super.key, required this.pfp, required this.username, required this.date});
+  const CommentInfoRow({
+    super.key,
+    required this.pfp,
+    required this.username,
+    required this.date,
+  });
   final String pfp;
   final String username;
   final String date;
@@ -12,7 +18,7 @@ class CommentInfoRow extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 24,
-          backgroundColor: Colors.black,
+          backgroundColor: AppColors.black,
           backgroundImage: NetworkImage(
             pfp,
           ),

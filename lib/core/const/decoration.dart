@@ -1,4 +1,4 @@
-import 'package:social_media_demo/core/const/colors.dart';
+import 'package:sm_project/core/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +24,7 @@ InputDecoration myinputDecoration(
       padding: const EdgeInsets.all(8.0),
       child: Text(
         label,
-        style: const TextStyle(fontSize: 15, color: Colors.black),
+        style: const TextStyle(fontSize: 15, color: AppColors.black),
       ),
     ),
     suffixIcon: suffixIcon,

@@ -1,5 +1,6 @@
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/controller/global/obx_con.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/controller/global/obx_con.dart';
+import 'package:sm_project/core/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:ui' as ui;
@@ -21,7 +22,7 @@ class CommentsTextForm extends StatelessWidget {
           controller: obx.mess,
           maxLines: null,
           keyboardType: TextInputType.multiline,
-          focusNode: obx.f,
+          focusNode: obx.textFormFocus,
           textDirection: langCon.langTextField == 'en'
               ? ui.TextDirection.ltr
               : ui.TextDirection.rtl,
@@ -29,36 +30,35 @@ class CommentsTextForm extends StatelessWidget {
             textFieldScrollController
                 .jumpTo(textFieldScrollController.position.maxScrollExtent);
             langCon.update();
-            obx.mtcheck = val;
             val.isNotEmpty && val.length < 2
-                ? langCon.checkTextLang(val.trim(),)
+                ? langCon.checkTextLang(
+                    val.trim(),
+                  )
                 : null;
             langCon.update();
           },
-          onSaved: (newval) {
-            obx.mtcheck = newval;
-          },
+        
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: Colors.black),
+              borderSide: const BorderSide(color: AppColors.black),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: Colors.black),
+              borderSide: const BorderSide(color: AppColors.black),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: Colors.black),
+              borderSide: const BorderSide(color: AppColors.black),
             ),
             prefixIcon: IconButton(
               focusNode: focusNodeIcon,
               onPressed: () {
-                obx.f.canRequestFocus = true;
-                obx.f.unfocus();
-                obx.f.nextFocus();
+                obx.textFormFocus.canRequestFocus = true;
+                obx.textFormFocus.unfocus();
+                obx.textFormFocus.nextFocus();
                 obx.changeemojivis();
               },
               icon: GetX<ObxCon>(
@@ -66,7 +66,7 @@ class CommentsTextForm extends StatelessWidget {
                   obx.emoji.value == true
                       ? Icons.keyboard
                       : Icons.emoji_emotions_outlined,
-                  color: Colors.black,
+                  color: AppColors.black,
                 ),
               ),
             ),

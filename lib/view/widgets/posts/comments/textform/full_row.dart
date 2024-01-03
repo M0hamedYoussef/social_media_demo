@@ -1,7 +1,7 @@
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/textform/buttons/send_button.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/textform/buttons/upload_button.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/textform/textform/comments_text_form.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/view/widgets/posts/comments/textform/buttons/send_button.dart';
+import 'package:sm_project/view/widgets/posts/comments/textform/buttons/upload_button.dart';
+import 'package:sm_project/view/widgets/posts/comments/textform/textform/comments_text_form.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,7 +1,8 @@
-import 'package:social_media_demo/controller/auth/login_con.dart';
-import 'package:social_media_demo/controller/auth/reg_con.dart';
+import 'package:sm_project/controller/auth/login_con.dart';
+import 'package:sm_project/controller/auth/reg_con.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 class RegPassForm extends GetView<RegCon> {
   const RegPassForm({super.key});
@@ -37,10 +38,10 @@ class RegPassForm extends GetView<RegCon> {
               Get.defaultDialog(
                 title: '',
                 content: Container(
-                  color: Colors.white,
+                  color: AppColors.white,
                   child: const Center(
                     child: CircularProgressIndicator(
-                      color: Colors.black,
+                      color: AppColors.darkBlue,
                     ),
                   ),
                 ),
@@ -54,25 +55,29 @@ class RegPassForm extends GetView<RegCon> {
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: Colors.black),
+              borderSide: const BorderSide(color: AppColors.darkBlue1),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: Colors.black),
+              borderSide: const BorderSide(color: AppColors.darkBlue1),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: Colors.black),
+              borderSide: const BorderSide(color: AppColors.darkBlue1),
             ),
             label: const Text(
               'Password',
-              style: TextStyle(fontSize: 15, color: Colors.black),
+              style: TextStyle(fontSize: 15, color: AppColors.darkBlue1),
             ),
             hintText: "Enter Your Password",
+            hintStyle: TextStyle(
+              fontSize: 15,
+              color: AppColors.darkBlue1.withOpacity(0.5),
+            ),
             suffixIcon: IconButton(
               icon: Icon(
                 con.passeye ? Icons.visibility : Icons.visibility_off,
-                color: Colors.black,
+                color: AppColors.darkBlue1,
               ),
               onPressed: () {
                 loginCon.changeobsc();

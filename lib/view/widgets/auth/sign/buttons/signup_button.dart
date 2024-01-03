@@ -1,6 +1,7 @@
-import 'package:social_media_demo/routes.dart';
+import 'package:sm_project/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 class SignUpButton extends StatelessWidget {
   const SignUpButton({super.key});
@@ -15,17 +16,19 @@ class SignUpButton extends StatelessWidget {
           const Text(
             'Don\'t Have An Account ?',
             style: TextStyle(
-              color: Colors.black,
+              color: AppColors.darkBlue1,
             ),
           ),
           GestureDetector(
             onTap: () {
               Get.toNamed(AppRoutes.reg);
             },
-            child: const Text(
+            child: Text(
               'Sign Up',
               style: TextStyle(
-                  color: Colors.black, decoration: TextDecoration.underline),
+                color: AppColors.darkBlue1.withOpacity(0.7),
+                decoration: TextDecoration.underline,
+              ),
             ),
           ),
         ],

@@ -1,6 +1,5 @@
-import 'dart:io';
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/controller/posts/comments_con.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/controller/posts/comments_con.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,33 +27,6 @@ class CommentsUploadButton extends StatelessWidget {
                       onPressed: () async {
                         Get.back();
                         await commentsCon.commentScreenImage();
-                        commentsCon.bottomWid = SizedBox(
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Image.file(
-                                    File(
-                                      commentsCon.addImagePath.toString(),
-                                    ),
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                child: Text('Send Image',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                              ),
-                            ],
-                          ),
-                        );
-                        commentsCon.update();
                         langCon.update();
                       },
                       icon: const Icon(Icons.image),

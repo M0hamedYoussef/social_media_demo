@@ -1,4 +1,4 @@
-import 'package:social_media_demo/routes.dart';
+import 'package:sm_project/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -26,14 +26,15 @@ class RegCon extends GetxController {
         email: regEmailCon,
         password: regPassCon,
       );
-      users.add(
+      users.doc(FirebaseAuth.instance.currentUser!.uid).set(
         {
           'Email': regEmailCon,
           'Password': regPassCon,
-          'UserID': FirebaseAuth.instance.currentUser?.uid,
+          'UserID': FirebaseAuth.instance.currentUser!.uid,
           'token': await token,
           'UserName': null,
           'pfp': null,
+          'friends': [],
           'lastmess': null,
           'lastdate': null,
         },

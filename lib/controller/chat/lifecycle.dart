@@ -1,4 +1,4 @@
-import 'package:social_media_demo/controller/chat/privatemess_con.dart';
+import 'package:sm_project/controller/chat/privatemess_con.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,10 +20,9 @@ class LifeCycle extends GetxController with WidgetsBindingObserver {
   @override
   didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.inactive) {
+    if (state != AppLifecycleState.resumed) {
       _privateChatsCon.setOutOfChat();
-    }
-    if (state == AppLifecycleState.resumed) {
+    } else {
       _privateChatsCon.setInCHAT();
     }
   }

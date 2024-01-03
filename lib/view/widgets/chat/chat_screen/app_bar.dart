@@ -1,13 +1,39 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:social_media_demo/controller/chat/privatemess_con.dart';
-import 'package:social_media_demo/view/screens/media/image/imagescreen.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:sm_project/controller/chat/colors_controller.dart';
+import 'package:sm_project/controller/chat/privatemess_con.dart';
+import 'package:sm_project/view/screens/main/media/image/imagescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 PreferredSizeWidget chatAppBar() {
   PrivateChatsCon priv = Get.find();
+  ColorsController colorsController = Get.put(ColorsController());
 
   return AppBar(
+    backgroundColor: colorsController.savedAppBarColor,
+    actions: [
+      IconButton(
+        onPressed: () {
+          colorsController.barDialogOpened();
+          Get.defaultDialog(
+            title: 'Select Color',
+            onWillPop: colorsController.coloringIconPop,
+            content: ColorPicker(
+              pickerColor: colorsController.savedAppBarColor,
+              pickerAreaHeightPercent: 0.7,
+              hexInputBar: true,
+              onColorChanged: (color) {
+                colorsController.appBarColorSelected(appBarColor: color);
+              },
+            ),
+          );
+        },
+        icon: const Icon(Icons.color_lens),
+        color: colorsController.coloringIcon,
+      ),
+    ],
     leading: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -18,7 +44,7 @@ PreferredSizeWidget chatAppBar() {
           },
           child: const Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: AppColors.black,
           ),
         ),
         Expanded(
@@ -36,14 +62,13 @@ PreferredSizeWidget chatAppBar() {
               tag: priv.friendUid + priv.friendPFP,
               child: CircleAvatar(
                 backgroundImage: CachedNetworkImageProvider(priv.friendPFP),
-                backgroundColor: Colors.black,
+                backgroundColor: AppColors.black,
               ),
             ),
           ),
         ),
       ],
     ),
-    backgroundColor: Colors.white,
     elevation: 2,
     title: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +76,7 @@ PreferredSizeWidget chatAppBar() {
       children: [
         Text(
           priv.friendName,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(color: AppColors.black),
         ),
         StreamBuilder(
           stream: priv.friendStatusInMY!.snapshots(),
@@ -71,8 +96,8 @@ PreferredSizeWidget chatAppBar() {
                       Text(
                         snapshot.data!.data().toString().substring(
                             9, snapshot.data!.data().toString().length - 1),
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 15),
+                        style: const TextStyle(
+                            color: AppColors.black, fontSize: 15),
                       ),
                     ],
                   );
@@ -82,7 +107,8 @@ PreferredSizeWidget chatAppBar() {
                   return Text(
                     snapshot.data!.data().toString().substring(
                         9, snapshot.data!.data().toString().length - 1),
-                    style: const TextStyle(color: Colors.black, fontSize: 15),
+                    style:
+                        const TextStyle(color: AppColors.black, fontSize: 15),
                   );
                 } else if (snapshot.data!
                     .data()
@@ -92,7 +118,8 @@ PreferredSizeWidget chatAppBar() {
                   return Text(
                     snapshot.data!.data().toString().substring(
                         9, snapshot.data!.data().toString().length - 1),
-                    style: const TextStyle(color: Colors.black, fontSize: 15),
+                    style:
+                        const TextStyle(color: AppColors.black, fontSize: 15),
                   );
                 } else if (snapshot.data!
                         .data()
@@ -103,13 +130,13 @@ PreferredSizeWidget chatAppBar() {
                     '') {
                   return const Text(
                     'Disconnected',
-                    style: TextStyle(color: Colors.black, fontSize: 15),
+                    style: TextStyle(color: AppColors.black, fontSize: 15),
                   );
                 }
               } else {
                 return const Text(
                   'Disconnected',
-                  style: TextStyle(color: Colors.black, fontSize: 15),
+                  style: TextStyle(color: AppColors.black, fontSize: 15),
                 );
               }
             }

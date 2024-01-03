@@ -1,5 +1,6 @@
-import 'package:social_media_demo/controller/auth/reg_con.dart';
+import 'package:sm_project/controller/auth/reg_con.dart';
 import 'package:flutter/material.dart';
+import 'package:sm_project/core/const/colors.dart';
 import 'package:get/get.dart';
 
 class RegSignUpCusttomButton extends GetView<RegCon> {
@@ -19,8 +20,8 @@ class RegSignUpCusttomButton extends GetView<RegCon> {
         width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.black,
+            backgroundColor: AppColors.darkBlue,
+            foregroundColor: AppColors.darkBlue1,
             elevation: 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
@@ -33,10 +34,10 @@ class RegSignUpCusttomButton extends GetView<RegCon> {
               Get.defaultDialog(
                 title: '',
                 content: Container(
-                  color: Colors.white,
+                  color: AppColors.white,
                   child: const Center(
                     child: CircularProgressIndicator(
-                      color: Colors.black,
+                      color: AppColors.black,
                     ),
                   ),
                 ),
@@ -49,7 +50,7 @@ class RegSignUpCusttomButton extends GetView<RegCon> {
           },
           child: const Text(
             'Sing Up',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: AppColors.white),
           ),
         ),
       ),

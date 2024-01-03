@@ -1,7 +1,9 @@
-import 'package:social_media_demo/view/widgets/posts/addscreen/added_media.dart';
-import 'package:social_media_demo/view/widgets/posts/addscreen/app_bar.dart';
-import 'package:social_media_demo/view/widgets/posts/addscreen/custom_listview.dart';
-import 'package:social_media_demo/view/widgets/posts/addscreen/textform.dart';
+import 'package:get/get.dart';
+import 'package:sm_project/view/screens/main/main/main_screen.dart';
+import 'package:sm_project/view/widgets/posts/addscreen/added_media.dart';
+import 'package:sm_project/view/widgets/posts/addscreen/app_bar.dart';
+import 'package:sm_project/view/widgets/posts/addscreen/custom_listview.dart';
+import 'package:sm_project/view/widgets/posts/addscreen/textform.dart';
 import 'package:flutter/material.dart';
 
 class AddPost extends StatelessWidget {
@@ -10,11 +12,20 @@ class AddPost extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: addPostsBar(),
-      body: const AddPostsListView(
-        children: [
-          AddPostsTextForm(),
-          AddedMedia(),
-        ],
+      body: WillPopScope(
+        onWillPop: () {
+          Get.off(
+            () => const MainScreen(),
+            transition: Transition.size,
+          );
+          return Future.value(false);
+        },
+        child: const AddPostsListView(
+          children: [
+            AddPostsTextForm(),
+            AddedMedia(),
+          ],
+        ),
       ),
     );
   }

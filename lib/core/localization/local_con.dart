@@ -1,4 +1,4 @@
-import 'package:social_media_demo/core/services/my_services.dart';
+import 'package:sm_project/core/services/my_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

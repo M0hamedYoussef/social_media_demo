@@ -1,8 +1,11 @@
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/controller/chat/privatemess_con.dart';
-import 'package:social_media_demo/core/services/my_services.dart';
-import 'package:social_media_demo/view/screens/media/image/imagescreen.dart';
-import 'package:social_media_demo/view/screens/media/video/videoscreen.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/controller/chat/privatemess_con.dart';
+import 'package:sm_project/core/const/colors.dart';
+import 'package:sm_project/core/services/my_services.dart';
+import 'package:sm_project/view/screens/main/media/image/imagescreen.dart';
+import 'package:sm_project/view/screens/main/media/video/videoscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:ui' as ui;
@@ -27,30 +30,23 @@ class AppCon {
 //////////////////////////////////////////
 
   getInfo() async {
-    if (myServices.mySharedPrefs.getString('pfp') != null &&
-        myServices.mySharedPrefs.getString('username') != null) {
-      name = myServices.mySharedPrefs.getString('username');
-      pfp = myServices.mySharedPrefs.getString('pfp');
-    } else {
+    if (FirebaseAuth.instance.currentUser?.uid != null) {
       await FirebaseFirestore.instance
           .collection('users')
           .where('UserID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .get()
           .then(
-            (value) => {
-              // ignore: avoid_function_literals_in_foreach_calls
-              value.docs.forEach(
-                (element) async {
-                  await myServices.mySharedPrefs
-                      .setString('username', element.data()['UserName']);
-                  await myServices.mySharedPrefs
-                      .setString('pfp', element.data()['pfp']);
-                  name = element.data()['UserName'];
-                  pfp = element.data()['pfp'];
-                },
-              )
-            },
-          );
+        (value) async {
+          for (var element in value.docs) {
+            await myServices.mySharedPrefs
+                .setString('username', element.data()['UserName']);
+            await myServices.mySharedPrefs
+                .setString('pfp', element.data()['pfp']);
+            name = element.data()['UserName'];
+            pfp = element.data()['pfp'];
+          }
+        },
+      );
     }
   }
 
@@ -66,7 +62,7 @@ class AppCon {
     isMe ? editCon.text = formatedString : null;
     isMe
         ? Get.bottomSheet(
-            backgroundColor: Colors.white,
+            backgroundColor: AppColors.white,
             SizedBox(
               height: 100,
               child: Row(
@@ -97,7 +93,7 @@ class AppCon {
                             onPressed: () {
                               Get.defaultDialog(
                                 cancel: MaterialButton(
-                                  color: Colors.black,
+                                  color: AppColors.black,
                                   onPressed: () {
                                     Get.back();
                                     Get.back();
@@ -105,7 +101,7 @@ class AppCon {
                                   child: const Text(
                                     'Back',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: AppColors.white,
                                     ),
                                   ),
                                 ),
@@ -127,6 +123,10 @@ class AppCon {
                         children: [
                           IconButton(
                             onPressed: () {
+                              _langCon.checkTextLang(
+                                editCon.text.trim(),
+                                forEdit: true,
+                              );
                               Get.back();
                               Get.defaultDialog(
                                 title: 'Edit Message',
@@ -172,27 +172,27 @@ class AppCon {
                                                   borderRadius:
                                                       BorderRadius.circular(16),
                                                   borderSide: const BorderSide(
-                                                      color: Colors.black),
+                                                      color: AppColors.black),
                                                 ),
                                                 enabledBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(16),
                                                   borderSide: const BorderSide(
-                                                      color: Colors.black),
+                                                      color: AppColors.black),
                                                 ),
                                                 focusedBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(16),
                                                   borderSide: const BorderSide(
-                                                      color: Colors.black),
+                                                      color: AppColors.black),
                                                 ),
                                                 label: const Text(
                                                   'Message',
                                                   style: TextStyle(
                                                       fontSize: 15,
-                                                      color: Colors.black),
+                                                      color: AppColors.black),
                                                 ),
                                                 hintText: "Enter Your Message",
                                               ),
@@ -209,8 +209,8 @@ class AppCon {
                                         width: double.infinity,
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.black,
-                                            foregroundColor: Colors.black,
+                                            backgroundColor: AppColors.black,
+                                            foregroundColor: AppColors.black,
                                             elevation: 4,
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -221,12 +221,14 @@ class AppCon {
                                             if (editCon.text
                                                 .trim()
                                                 .isNotEmpty) {
+                                              _langCon.checkLang(
+                                                  editCon.text.trim());
                                               Get.back();
                                               isPrivate
                                                   ? _privateChatsCon.editMess(
                                                       messID,
                                                       editCon.text.trim(),
-                                                      _langCon.langTextField!,
+                                                      _langCon.langEn!,
                                                     )
                                                   : null;
                                             } else if (editCon.text
@@ -240,8 +242,8 @@ class AppCon {
                                           },
                                           child: const Text(
                                             'Confirm',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: TextStyle(
+                                                color: AppColors.white),
                                           ),
                                         ),
                                       ),
@@ -263,14 +265,14 @@ class AppCon {
           )
         : Get.defaultDialog(
             cancel: MaterialButton(
-              color: Colors.black,
+              color: AppColors.black,
               onPressed: () {
                 Get.back();
               },
               child: const Text(
                 'Back',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
             ),
@@ -321,6 +323,14 @@ class AppCon {
                 ? const EdgeInsets.all(0)
                 : const EdgeInsets.fromLTRB(4, 0, 0, 0),
             child: GestureDetector(
+              onDoubleTap: () async {
+                Clipboard.setData(ClipboardData(text: multiLangMESS));
+                Fluttertoast.showToast(
+                  msg: 'Copied !',
+                  textColor: AppColors.black,
+                  backgroundColor: AppColors.white,
+                );
+              },
               onLongPress: () {
                 messageOnLongTap(
                   isMe: isMe,
@@ -348,7 +358,8 @@ class AppCon {
                               child: Text(
                                 username,
                                 style: TextStyle(
-                                  color: isMe ? Colors.black : Colors.black,
+                                  color:
+                                      isMe ? AppColors.black : AppColors.black,
                                   fontSize: 16.0,
                                 ),
                               ),
@@ -364,7 +375,9 @@ class AppCon {
                       padding: const EdgeInsets.symmetric(
                           vertical: 8.0, horizontal: 10.0),
                       decoration: BoxDecoration(
-                        color: isMe ? Colors.black : Colors.grey[300],
+                        color: isMe
+                            ? const Color.fromARGB(255, 2, 36, 64)
+                            : Colors.grey[300],
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                       child: RichText(
@@ -383,11 +396,13 @@ class AppCon {
                                       ..onTap = () async {
                                         await launchUrl(
                                           Uri.parse(listedMessage[index]),
-                                          mode: LaunchMode.inAppWebView,
+                                          mode: LaunchMode.externalApplication,
                                         );
                                       },
                                     style: TextStyle(
-                                      color: isMe ? Colors.white : Colors.black,
+                                      color: isMe
+                                          ? AppColors.white
+                                          : AppColors.black,
                                       fontSize: 16.0,
                                       decoration: TextDecoration.underline,
                                     ),
@@ -403,11 +418,13 @@ class AppCon {
                                         await launchUrl(
                                           Uri.parse(
                                               'http:${listedMessage[index]}'),
-                                          mode: LaunchMode.inAppWebView,
+                                          mode: LaunchMode.externalApplication,
                                         );
                                       },
                                     style: TextStyle(
-                                      color: isMe ? Colors.white : Colors.black,
+                                      color: isMe
+                                          ? AppColors.white
+                                          : AppColors.black,
                                       fontSize: 16.0,
                                       decoration: TextDecoration.underline,
                                     ),
@@ -416,7 +433,9 @@ class AppCon {
                                   return TextSpan(
                                     text: listedMessage[index] + ' ',
                                     style: TextStyle(
-                                      color: isMe ? Colors.white : Colors.black,
+                                      color: isMe
+                                          ? AppColors.white
+                                          : AppColors.black,
                                       fontSize: 16.0,
                                     ),
                                   );
@@ -442,7 +461,7 @@ class AppCon {
                       ? const EdgeInsets.fromLTRB(0, 0, 0, 0)
                       : const EdgeInsets.fromLTRB(0, 30, 0, 0),
                   child: CircleAvatar(
-                    backgroundColor: Colors.black,
+                    backgroundColor: AppColors.black,
                     backgroundImage: CachedNetworkImageProvider(pfpMess),
                   ),
                 ),
@@ -473,7 +492,7 @@ class AppCon {
                     child: Text(
                       username,
                       style: TextStyle(
-                        color: isMe ? Colors.black : Colors.black,
+                        color: isMe ? AppColors.black : AppColors.black,
                         fontSize: 16.0,
                       ),
                     ),
@@ -494,7 +513,7 @@ class AppCon {
                     height: 170,
                     alignment: Alignment.topLeft,
                     child: CircleAvatar(
-                      backgroundColor: Colors.black,
+                      backgroundColor: AppColors.black,
                       backgroundImage: CachedNetworkImageProvider(pfp),
                     ),
                   ),
@@ -528,12 +547,12 @@ class AppCon {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
-                        color: Colors.black,
+                        color: AppColors.black,
                         width: 80,
                         height: 160,
                         child: const Center(
                           child: CircularProgressIndicator(
-                            color: Colors.white,
+                            color: AppColors.white,
                           ),
                         ),
                       ),
@@ -569,7 +588,7 @@ class AppCon {
                 margin: const EdgeInsets.fromLTRB(0, 35, 0, 0),
                 alignment: Alignment.topLeft,
                 child: CircleAvatar(
-                  backgroundColor: Colors.black,
+                  backgroundColor: AppColors.black,
                   backgroundImage: CachedNetworkImageProvider(pfpImg),
                 ),
               ),
@@ -594,7 +613,7 @@ class AppCon {
                           child: Text(
                             username,
                             style: const TextStyle(
-                              color: Colors.black,
+                              color: AppColors.black,
                               fontSize: 16.0,
                             ),
                           ),
@@ -612,7 +631,7 @@ class AppCon {
                 onLongPress: () {
                   isMe
                       ? Get.bottomSheet(
-                          backgroundColor: Colors.white,
+                          backgroundColor: AppColors.white,
                           SizedBox(
                             height: 100,
                             child: Padding(
@@ -626,7 +645,7 @@ class AppCon {
                                           onPressed: () {
                                             Get.defaultDialog(
                                               cancel: MaterialButton(
-                                                color: Colors.black,
+                                                color: AppColors.black,
                                                 onPressed: () {
                                                   Get.back();
                                                   Get.back();
@@ -634,7 +653,7 @@ class AppCon {
                                                 child: const Text(
                                                   'Back',
                                                   style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: AppColors.white,
                                                   ),
                                                 ),
                                               ),
@@ -661,7 +680,7 @@ class AppCon {
                                         const Text(
                                           'Delete Image',
                                           style: TextStyle(
-                                            color: Colors.black,
+                                            color: AppColors.black,
                                           ),
                                         ),
                                       ],
@@ -674,14 +693,14 @@ class AppCon {
                         )
                       : Get.defaultDialog(
                           cancel: MaterialButton(
-                            color: Colors.black,
+                            color: AppColors.black,
                             onPressed: () {
                               Get.back();
                             },
                             child: const Text(
                               'Back',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -757,7 +776,7 @@ class AppCon {
                     child: Text(
                       username,
                       style: TextStyle(
-                        color: isMe ? Colors.black : Colors.black,
+                        color: isMe ? AppColors.black : AppColors.black,
                         fontSize: 16.0,
                       ),
                     ),
@@ -778,7 +797,7 @@ class AppCon {
                     height: 170,
                     alignment: Alignment.topLeft,
                     child: CircleAvatar(
-                      backgroundColor: Colors.black,
+                      backgroundColor: AppColors.black,
                       backgroundImage: CachedNetworkImageProvider(pfp),
                     ),
                   ),
@@ -812,12 +831,12 @@ class AppCon {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
-                        color: Colors.black,
+                        color: AppColors.black,
                         width: 80,
                         height: 160,
                         child: const Center(
                           child: CircularProgressIndicator(
-                            color: Colors.white,
+                            color: AppColors.white,
                           ),
                         ),
                       ),
@@ -852,7 +871,7 @@ class AppCon {
                 margin: const EdgeInsets.fromLTRB(0, 35, 0, 0),
                 alignment: Alignment.topLeft,
                 child: CircleAvatar(
-                  backgroundColor: Colors.black,
+                  backgroundColor: AppColors.black,
                   backgroundImage: CachedNetworkImageProvider(pfpVid),
                 ),
               ),
@@ -877,7 +896,7 @@ class AppCon {
                           child: Text(
                             username,
                             style: const TextStyle(
-                              color: Colors.black,
+                              color: AppColors.black,
                               fontSize: 16.0,
                             ),
                           ),
@@ -905,7 +924,7 @@ class AppCon {
                     onLongPress: () {
                       isMe
                           ? Get.bottomSheet(
-                              backgroundColor: Colors.white,
+                              backgroundColor: AppColors.white,
                               SizedBox(
                                 height: 100,
                                 child: Row(
@@ -919,7 +938,7 @@ class AppCon {
                                               onPressed: () {
                                                 Get.defaultDialog(
                                                   cancel: MaterialButton(
-                                                    color: Colors.black,
+                                                    color: AppColors.black,
                                                     onPressed: () {
                                                       Get.back();
                                                       Get.back();
@@ -927,7 +946,7 @@ class AppCon {
                                                     child: const Text(
                                                       'Back',
                                                       style: TextStyle(
-                                                        color: Colors.white,
+                                                        color: AppColors.white,
                                                       ),
                                                     ),
                                                   ),
@@ -966,14 +985,14 @@ class AppCon {
                             )
                           : Get.defaultDialog(
                               cancel: MaterialButton(
-                                color: Colors.black,
+                                color: AppColors.black,
                                 onPressed: () {
                                   Get.back();
                                 },
                                 child: const Text(
                                   'Back',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: AppColors.white,
                                   ),
                                 ),
                               ),
@@ -1023,7 +1042,8 @@ class AppCon {
                                       shape: BoxShape.circle,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black.withOpacity(0.6),
+                                          color:
+                                              AppColors.black.withOpacity(0.6),
                                           spreadRadius: -2,
                                           blurRadius: 0,
                                           offset: const Offset(1, 1),
@@ -1034,7 +1054,7 @@ class AppCon {
                                       padding: EdgeInsets.all(8.0),
                                       child: Icon(
                                         Icons.play_arrow,
-                                        color: Colors.white,
+                                        color: AppColors.white,
                                         size: 35,
                                       ),
                                     ),
@@ -1061,7 +1081,7 @@ class AppCon {
                 margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                 alignment: Alignment.topLeft,
                 child: CircleAvatar(
-                  backgroundColor: Colors.black,
+                  backgroundColor: AppColors.black,
                   backgroundImage: CachedNetworkImageProvider(pfpVid),
                 ),
               ),
@@ -1091,7 +1111,7 @@ class AppCon {
                 Text(
                   username,
                   style: const TextStyle(
-                    color: Colors.black,
+                    color: AppColors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -1135,7 +1155,7 @@ class AppCon {
                 Text(
                   username,
                   style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
+                      color: AppColors.black, fontWeight: FontWeight.bold),
                 ),
                 IconButton(
                   onPressed: () {
@@ -1190,7 +1210,7 @@ class AppCon {
                 child: Text(
                   '${theUser[0].capitalize}${theUser.substring(1, theUser.length)} Replied To ${repliedTO[0].capitalize}${repliedTO.substring(1, repliedTO.length)}',
                   style: TextStyle(
-                    color: isMe ? Colors.black : Colors.black,
+                    color: isMe ? AppColors.black : AppColors.black,
                     fontSize: 14.0,
                   ),
                 ),
@@ -1215,7 +1235,7 @@ class AppCon {
                     ? ui.TextDirection.ltr
                     : ui.TextDirection.rtl,
                 style: const TextStyle(
-                  color: Colors.black,
+                  color: AppColors.black,
                   fontSize: 16.0,
                 ),
               ),
@@ -1246,7 +1266,7 @@ class AppCon {
                 child: Text(
                   '${theUser[0].capitalize}${theUser.substring(1, theUser.length)} Replied To ${repliedTO[0].capitalize}${repliedTO.substring(1, repliedTO.length)}',
                   style: TextStyle(
-                    color: isMe ? Colors.black : Colors.black,
+                    color: isMe ? AppColors.black : AppColors.black,
                     fontSize: 14.0,
                   ),
                 ),
@@ -1279,6 +1299,300 @@ class AppCon {
           ),
         ),
       ],
+    );
+  }
+
+  buildVoiceMessage(
+    String dateMess,
+    String docID,
+    bool isMe,
+    bool isPrivate, {
+    String? pfp,
+    String? username,
+    String? myUid,
+    required double pos,
+    required double duration,
+    required bool isReply,
+    required String currentDocID,
+    required String recordDuration,
+    Function? fun,
+  }) {
+    final dateFormated = DateFormat('y-M-d h:mm a').format(
+      DateTime.parse(
+        dateMess,
+      ),
+    );
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+      child: Stack(
+        children: [
+          Padding(
+            padding: isMe
+                ? const EdgeInsets.all(0)
+                : const EdgeInsets.fromLTRB(4, 0, 0, 0),
+            child: GestureDetector(
+              onLongPress: () {
+                isMe
+                    ? Get.bottomSheet(
+                        backgroundColor: AppColors.white,
+                        SizedBox(
+                          height: 100,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Column(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          Get.defaultDialog(
+                                            cancel: MaterialButton(
+                                              color: AppColors.black,
+                                              onPressed: () {
+                                                Get.back();
+                                                Get.back();
+                                              },
+                                              child: const Text(
+                                                'Back',
+                                                style: TextStyle(
+                                                  color: AppColors.white,
+                                                ),
+                                              ),
+                                            ),
+                                            title: 'Message Sent Date',
+                                            content: Text(dateFormated),
+                                          );
+                                        },
+                                        icon: const Icon(Icons.date_range),
+                                      ),
+                                      const Text('Message Date'),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Column(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          fun!();
+                                          Get.back();
+                                        },
+                                        icon: const Icon(Icons.delete),
+                                      ),
+                                      const Text('Delete Message'),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Get.defaultDialog(
+                        cancel: MaterialButton(
+                          color: AppColors.black,
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text(
+                            'Back',
+                            style: TextStyle(
+                              color: AppColors.white,
+                            ),
+                          ),
+                        ),
+                        title: 'Message Sent Date',
+                        content: Text(dateFormated),
+                      );
+              },
+              child: Column(
+                children: [
+                  isMe
+                      ? const SizedBox(
+                          height: 0,
+                          width: 0,
+                        )
+                      : isReply
+                          ? const SizedBox()
+                          : Container(
+                              alignment: Alignment.topLeft,
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                              margin: const EdgeInsets.fromLTRB(50, 0, 0, 0),
+                              child: Text(
+                                username!,
+                                style: TextStyle(
+                                  color:
+                                      isMe ? AppColors.black : AppColors.black,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            ),
+                  Align(
+                    alignment:
+                        isMe ? Alignment.bottomRight : Alignment.bottomLeft,
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        left: isMe ? 64.0 : 40.0,
+                        right: isMe ? 8.0 : 64.0,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 10.0),
+                      decoration: BoxDecoration(
+                        color: isMe
+                            ? const Color.fromARGB(255, 2, 36, 64)
+                            : Colors.grey[300],
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 3),
+                            child: Icon(
+                              currentDocID == docID
+                                  ? Icons.pause
+                                  : Icons.play_arrow,
+                              color:
+                                  isMe ? AppColors.white : AppColors.darkGrey,
+                            ),
+                          ),
+                          Text(
+                            currentDocID == docID
+                                ? Duration(microseconds: pos.toInt())
+                                    .toString()
+                                    .substring(0, 7)
+                                : recordDuration.toString()[6] == '0'
+                                    ? '0:00:01'
+                                    : recordDuration.toString().substring(0, 7),
+                            style: TextStyle(
+                              color:
+                                  isMe ? AppColors.white : AppColors.darkGrey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          isMe
+              ? const SizedBox(
+                  width: 0,
+                  height: 0,
+                )
+              : Container(
+                  margin: isReply
+                      ? const EdgeInsets.fromLTRB(0, 0, 0, 0)
+                      : const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.black,
+                    backgroundImage: CachedNetworkImageProvider(pfp!),
+                  ),
+                ),
+        ],
+      ),
+    );
+  }
+
+  buildLoadingVoiceMessage(
+    bool isMe,
+    bool isPrivate, {
+    String? pfp,
+    String? username,
+    String? myUid,
+    required bool isReply,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              isMe
+                  ? const SizedBox(
+                      height: 0,
+                      width: 0,
+                    )
+                  : isReply
+                      ? const SizedBox()
+                      : Container(
+                          alignment: Alignment.topLeft,
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                          margin: const EdgeInsets.fromLTRB(50, 0, 0, 0),
+                          child: Text(
+                            username!,
+                            style: TextStyle(
+                              color: isMe ? AppColors.black : AppColors.black,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+              Align(
+                alignment: isMe ? Alignment.bottomRight : Alignment.bottomLeft,
+                child: Container(
+                  margin: EdgeInsets.only(
+                    left: isMe ? 64.0 : 40.0,
+                    right: isMe ? 8.0 : 64.0,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 10.0),
+                  decoration: BoxDecoration(
+                    color: isMe
+                        ? const Color.fromARGB(255, 2, 36, 64)
+                        : Colors.grey[300],
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: SizedBox.fromSize(
+                          size: const Size.fromRadius(10),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: isMe
+                                  ? AppColors.white
+                                  : const Color.fromARGB(255, 37, 36, 36),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "0:00:00",
+                        style: TextStyle(
+                          color: isMe ? AppColors.white : AppColors.darkGrey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          isMe
+              ? const SizedBox(
+                  width: 0,
+                  height: 0,
+                )
+              : Container(
+                  margin: isReply
+                      ? const EdgeInsets.fromLTRB(0, 0, 0, 0)
+                      : const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.black,
+                    backgroundImage: CachedNetworkImageProvider(pfp!),
+                  ),
+                ),
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 class CustomColumn extends StatelessWidget {
   const CustomColumn({super.key, required this.fst, required this.children});
@@ -11,7 +12,7 @@ class CustomColumn extends StatelessWidget {
         autovalidateMode: AutovalidateMode.disabled,
         key: fst,
         child: Container(
-          color: Colors.white,
+          color: AppColors.white,
           width: double.infinity,
           child: CustomScrollView(
             physics: const BouncingScrollPhysics(

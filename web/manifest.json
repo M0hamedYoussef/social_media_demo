@@ -1,6 +1,6 @@
 {
-    "name": "social_media_demo",
-    "short_name": "social_media_demo",
+    "name": "SMP",
+    "short_name": "SMP",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

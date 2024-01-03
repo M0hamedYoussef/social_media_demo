@@ -1,7 +1,7 @@
-import 'package:social_media_demo/controller/chat/privatemess_con.dart';
-import 'package:social_media_demo/controller/global/app_con.dart';
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/models/chat_model.dart';
+import 'package:sm_project/controller/chat/privatemess_con.dart';
+import 'package:sm_project/controller/global/app_con.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/models/chat_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swipe_to/swipe_to.dart';
@@ -12,10 +12,14 @@ class ImageFriend extends GetView<PrivateChatsCon> {
     required this.chatModel,
     required this.myUid,
     required this.friendUid,
+    required this.friendPfp,
+    required this.friendName,
     required this.fun,
   });
   final String myUid;
   final String friendUid;
+  final String friendPfp;
+  final String friendName;
   final ChatModel chatModel;
   final Function fun;
   @override
@@ -26,8 +30,8 @@ class ImageFriend extends GetView<PrivateChatsCon> {
         ? chatModel.isImgUploaded == false
             ? appCon.loadingImageContainer(
                 isMe: false,
-                username: chatModel.userName!,
-                pfp: chatModel.profilePicture!,
+                username: friendName,
+                pfp: friendPfp,
               )
             : SwipeTo(
                 key: ValueKey(
@@ -35,21 +39,21 @@ class ImageFriend extends GetView<PrivateChatsCon> {
                 ),
                 onRightSwipe: () {
                   controller.reply = appCon.replyIMG(
-                    chatModel.userName!,
+                    friendName,
                     chatModel.image!,
                     fun,
                   );
                   langCon.update();
                   controller.replied = true;
-                  controller.repliedTO = chatModel.userName!;
+                  controller.repliedTO = friendName;
                   controller.repliedMess = chatModel.image!;
                   controller.repliedMessID = chatModel.imgID;
                   controller.toType = 'Image';
                 },
                 child: appCon.buildImage(
                   chatModel.dateString!,
-                  chatModel.profilePicture!,
-                  chatModel.userName!,
+                  friendPfp,
+                  friendName,
                   chatModel.image!,
                   false,
                   false,
@@ -61,20 +65,20 @@ class ImageFriend extends GetView<PrivateChatsCon> {
                 ? chatModel.isImgUploaded == false
                     ? appCon.loadingImageContainer(
                         isMe: false,
-                        username: chatModel.userName!,
-                        pfp: chatModel.profilePicture!,
+                        username: friendName,
+                        pfp: friendPfp,
                       )
                     : SwipeTo(
                         key: ValueKey(chatModel.data),
                         onRightSwipe: () {
                           controller.reply = appCon.replyIMG(
-                            chatModel.userName!,
+                            friendName,
                             chatModel.image!,
                             fun,
                           );
                           langCon.update();
                           controller.replied = true;
-                          controller.repliedTO = chatModel.userName!;
+                          controller.repliedTO = friendName;
                           controller.repliedMess = chatModel.image!;
                           controller.repliedMessID = chatModel.imgID;
                           controller.toType = 'Image';
@@ -95,8 +99,8 @@ class ImageFriend extends GetView<PrivateChatsCon> {
                               ),
                               appCon.buildImage(
                                 chatModel.dateString!,
-                                chatModel.profilePicture!,
-                                chatModel.userName!,
+                                friendPfp,
+                                friendName,
                                 chatModel.image!,
                                 false,
                                 true,
@@ -111,8 +115,8 @@ class ImageFriend extends GetView<PrivateChatsCon> {
                     ? chatModel.isImgUploaded == false
                         ? appCon.loadingImageContainer(
                             isMe: false,
-                            username: chatModel.userName!,
-                            pfp: chatModel.profilePicture!,
+                            username: friendName,
+                            pfp: friendPfp,
                           )
                         : Padding(
                             padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
@@ -120,13 +124,13 @@ class ImageFriend extends GetView<PrivateChatsCon> {
                               key: ValueKey(chatModel.data),
                               onRightSwipe: () {
                                 controller.reply = appCon.replyIMG(
-                                  chatModel.userName!,
+                                  friendName,
                                   chatModel.image!,
                                   fun,
                                 );
                                 langCon.update();
                                 controller.replied = true;
-                                controller.repliedTO = chatModel.userName!;
+                                controller.repliedTO = friendName;
                                 controller.repliedMess = chatModel.image!;
                                 controller.repliedMessID = chatModel.imgID;
                                 controller.toType = 'Image';
@@ -142,7 +146,7 @@ class ImageFriend extends GetView<PrivateChatsCon> {
                                   appCon.buildImage(
                                     chatModel.dateString!,
                                     chatModel.profilePicture!,
-                                    chatModel.userName!,
+                                    friendName,
                                     chatModel.image!,
                                     false,
                                     true,

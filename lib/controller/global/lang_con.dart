@@ -106,17 +106,17 @@ class LangCon extends GetxController {
     }
   }
 
-  checkTextLang(String wannacheck) {
+  checkTextLang(String wannacheck, {bool forEdit = false}) {
     for (int i = 0; i < englishLetters.length; i++) {
       if (wannacheck.isNotEmpty) {
-        if (wannacheck[0].contains(englishLetters[i]) == true) {
+        if (wannacheck[forEdit ? 1 : 0].contains(englishLetters[i]) == true) {
           langTextField = 'en';
         }
       }
     }
     for (int i = 0; i < arabicLetters.length; i++) {
       if (wannacheck.isNotEmpty) {
-        if (wannacheck[0].contains(arabicLetters[i]) == true) {
+        if (wannacheck[forEdit ? 1 : 0].contains(arabicLetters[i]) == true) {
           langTextField = 'ar';
         }
       }

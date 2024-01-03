@@ -1,6 +1,6 @@
-import 'package:social_media_demo/models/comments_model.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/advanced/comment_info.dart';
-import 'package:social_media_demo/view/widgets/posts/comments/advanced/comment_options.dart';
+import 'package:sm_project/models/comments_model.dart';
+import 'package:sm_project/view/widgets/posts/comments/advanced/comment_info.dart';
+import 'package:sm_project/view/widgets/posts/comments/advanced/comment_options.dart';
 import 'package:flutter/material.dart';
 
 class CommentUpperBar extends StatelessWidget {

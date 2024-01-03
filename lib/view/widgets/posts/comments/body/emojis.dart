@@ -1,7 +1,8 @@
-import 'package:social_media_demo/controller/global/obx_con.dart';
+import 'package:sm_project/controller/global/obx_con.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_project/core/const/colors.dart';
 
 class CommentsEmoji extends StatelessWidget {
   const CommentsEmoji(
@@ -39,18 +40,18 @@ class CommentsEmoji extends StatelessWidget {
                 gridPadding: EdgeInsets.zero,
                 initCategory: Category.RECENT,
                 bgColor: Color(0xFFF2F2F2),
-                indicatorColor: Colors.black,
-                iconColor: Colors.black,
-                iconColorSelected: Colors.black,
-                backspaceColor: Colors.black,
-                skinToneDialogBgColor: Colors.white,
-                skinToneIndicatorColor: Colors.black,
+                indicatorColor: AppColors.black,
+                iconColor: AppColors.black,
+                iconColorSelected: AppColors.black,
+                backspaceColor: AppColors.black,
+                skinToneDialogBgColor: AppColors.white,
+                skinToneIndicatorColor: AppColors.black,
                 enableSkinTones: true,
                 showRecentsTab: true,
                 recentsLimit: 28,
                 noRecents: Text(
                   'No Recents',
-                  style: TextStyle(fontSize: 20, color: Colors.black26),
+                  style: TextStyle(fontSize: 20, color: AppColors.black26),
                   textAlign: TextAlign.center,
                 ),
                 loadingIndicator: SizedBox.shrink(),

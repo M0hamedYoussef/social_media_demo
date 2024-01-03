@@ -1,5 +1,5 @@
-import 'package:social_media_demo/controller/posts/comments_con.dart';
-import 'package:social_media_demo/models/comments_model.dart';
+import 'package:sm_project/controller/posts/comments_con.dart';
+import 'package:sm_project/models/comments_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

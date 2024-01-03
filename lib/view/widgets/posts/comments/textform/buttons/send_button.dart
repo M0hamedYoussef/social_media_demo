@@ -1,6 +1,6 @@
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/controller/global/obx_con.dart';
-import 'package:social_media_demo/controller/posts/comments_con.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/controller/global/obx_con.dart';
+import 'package:sm_project/controller/posts/comments_con.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,46 +23,42 @@ class CommentSendButton extends StatelessWidget {
 
     return IconButton(
       onPressed: () async {
-        if (obx.mtcheck!.isNotEmpty) {
-          if (obx.mess.text.trim() != '') {
-            if (commentsCon.uploadingCommentImage == null &&
-                commentsCon.uploadingCommentVid == null) {
-              commentsCon.textComment(
-                  posterNAME: posterNAME,
-                  posterTOKEN: posterTOKEN,
-                  posterUID: posterUid,
-                  docID: postID,
-                  myText: obx.mess.text,
-                  myLang: langCon.langTextField == 'en' ? 'en' : 'ar');
-              langCon.update();
-              obx.mess.clear();
-            } else if (commentsCon.uploadingCommentImage == true) {
-              commentsCon.bottomWid = const SizedBox();
-              commentsCon.uploadCommentImage(
-                  posterNAME: posterNAME,
-                  posterTOKEN: posterTOKEN,
-                  posterUID: posterUid,
-                  myLang: langCon.langTextField == 'en' ? 'en' : 'ar',
-                  docID: postID,
-                  myText: obx.mess.text);
-              langCon.update();
-              obx.mess.clear();
-              commentsCon.update();
-            } else if (commentsCon.uploadingCommentVid == true) {
-              commentsCon.bottomWid = const SizedBox();
-              commentsCon.uploadCommentVid(
-                  posterNAME: posterNAME,
-                  posterTOKEN: posterTOKEN,
-                  posterUID: posterUid,
-                  myLang: langCon.langTextField == 'en' ? 'en' : 'ar',
-                  docID: postID,
-                  myText: obx.mess.text);
-              langCon.update();
-              obx.mess.clear();
-              commentsCon.update();
-            }
-          } else if (obx.mtcheck!.trim() == '') {
+        if (obx.mess.text.trim().isNotEmpty) {
+          if (commentsCon.uploadingCommentImage == null &&
+              commentsCon.uploadingCommentVid == null) {
+            commentsCon.textComment(
+                posterNAME: posterNAME,
+                posterTOKEN: posterTOKEN,
+                posterUID: posterUid,
+                docID: postID,
+                myText: obx.mess.text,
+                myLang: langCon.langTextField == 'en' ? 'en' : 'ar');
+            langCon.update();
             obx.mess.clear();
+          } else if (commentsCon.uploadingCommentImage == true) {
+            commentsCon.bottomWid = const SizedBox();
+            commentsCon.uploadCommentImage(
+                posterNAME: posterNAME,
+                posterTOKEN: posterTOKEN,
+                posterUID: posterUid,
+                myLang: langCon.langTextField == 'en' ? 'en' : 'ar',
+                docID: postID,
+                myText: obx.mess.text);
+            langCon.update();
+            obx.mess.clear();
+            commentsCon.update();
+          } else if (commentsCon.uploadingCommentVid == true) {
+            commentsCon.bottomWid = const SizedBox();
+            commentsCon.uploadCommentVid(
+                posterNAME: posterNAME,
+                posterTOKEN: posterTOKEN,
+                posterUID: posterUid,
+                myLang: langCon.langTextField == 'en' ? 'en' : 'ar',
+                docID: postID,
+                myText: obx.mess.text);
+            langCon.update();
+            obx.mess.clear();
+            commentsCon.update();
           }
         } else if (commentsCon.uploadingCommentImage == true) {
           commentsCon.bottomWid = const SizedBox();

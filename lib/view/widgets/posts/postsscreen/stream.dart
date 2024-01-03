@@ -1,10 +1,11 @@
-import 'package:social_media_demo/controller/posts/posts_con.dart';
-import 'package:social_media_demo/core/services/my_services.dart';
-import 'package:social_media_demo/models/post_model.dart';
-import 'package:social_media_demo/view/widgets/posts/postsscreen/stream_files/post/post_handling.dart';
-import 'package:social_media_demo/view/widgets/posts/postsscreen/stream_files/decoration/post_bottom_bar.dart';
-import 'package:social_media_demo/view/widgets/posts/postsscreen/stream_files/post/post_text.dart';
-import 'package:social_media_demo/view/widgets/posts/postsscreen/stream_files/decoration/post_upper_row.dart';
+import 'package:sm_project/controller/posts/posts_con.dart';
+import 'package:sm_project/core/const/colors.dart';
+import 'package:sm_project/core/const/decoration.dart';
+import 'package:sm_project/models/post_model.dart';
+import 'package:sm_project/view/widgets/posts/postsscreen/stream_files/post/post_handling.dart';
+import 'package:sm_project/view/widgets/posts/postsscreen/stream_files/decoration/post_bottom_bar.dart';
+import 'package:sm_project/view/widgets/posts/postsscreen/stream_files/post/post_text.dart';
+import 'package:sm_project/view/widgets/posts/postsscreen/stream_files/decoration/post_upper_row.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,11 +16,15 @@ class PostsStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PostsCon postsCon = Get.put(PostsCon());
-    MyServices myServices = Get.find();
     String myUid = FirebaseAuth.instance.currentUser!.uid;
 
     return StreamBuilder(
-      stream: myServices.oneStream,
+      stream: postsCon.posts
+          .orderBy(
+            'date',
+            descending: true,
+          )
+          .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
@@ -57,10 +62,10 @@ class PostsStream extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: SizedBox(
-              height: MediaQuery.of(context).size.height / 15,
-              width: MediaQuery.of(context).size.width / 15,
+              height: AppDecoration().screenHeight / 15,
+              width: AppDecoration().screenWidth / 15,
               child: const CircularProgressIndicator(
-                color: Colors.white,
+                color: AppColors.white,
               ),
             ),
           );

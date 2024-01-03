@@ -1,12 +1,12 @@
-import 'package:social_media_demo/controller/auth/reg_con.dart';
-import 'package:social_media_demo/core/const/decoration.dart';
-import 'package:social_media_demo/view/widgets/auth/global/app_logo.dart';
-import 'package:social_media_demo/view/widgets/auth/global/custom_column.dart';
-import 'package:social_media_demo/view/widgets/auth/reg/forms/email_form.dart';
-import 'package:social_media_demo/view/widgets/auth/reg/forms/pass_form.dart';
-import 'package:social_media_demo/view/widgets/auth/reg/buttons/signup_button.dart';
-import 'package:social_media_demo/view/widgets/auth/global/text.dart';
-import 'package:social_media_demo/view/widgets/auth/sign/buttons/google_button.dart';
+import 'package:sm_project/controller/auth/reg_con.dart';
+import 'package:sm_project/core/const/decoration.dart';
+import 'package:sm_project/view/widgets/auth/global/app_logo.dart';
+import 'package:sm_project/view/widgets/auth/global/custom_column.dart';
+import 'package:sm_project/view/widgets/auth/reg/forms/email_form.dart';
+import 'package:sm_project/view/widgets/auth/reg/forms/pass_form.dart';
+import 'package:sm_project/view/widgets/auth/reg/buttons/signup_button.dart';
+import 'package:sm_project/view/widgets/auth/global/text.dart';
+import 'package:sm_project/view/widgets/auth/sign/buttons/google_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

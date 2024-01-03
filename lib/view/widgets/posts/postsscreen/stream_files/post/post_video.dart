@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:social_media_demo/models/post_model.dart';
-import 'package:social_media_demo/view/screens/media/video/videoscreen.dart';
+import 'package:sm_project/core/const/colors.dart';
+import 'package:sm_project/models/post_model.dart';
+import 'package:sm_project/view/screens/main/media/video/videoscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +37,7 @@ class PostVideo extends StatelessWidget {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.6),
+                        color: AppColors.black.withOpacity(0.6),
                         spreadRadius: -2,
                         blurRadius: 0,
                         offset: const Offset(1, 1),
@@ -47,7 +48,7 @@ class PostVideo extends StatelessWidget {
                     padding: EdgeInsets.all(8.0),
                     child: Icon(
                       Icons.play_arrow,
-                      color: Colors.white,
+                      color: AppColors.white,
                       size: 35,
                     ),
                   ),
@@ -57,7 +58,7 @@ class PostVideo extends StatelessWidget {
           )
         : const Center(
             child: CircularProgressIndicator(
-              color: Colors.black,
+              color: AppColors.black,
             ),
           );
   }

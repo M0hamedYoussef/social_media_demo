@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:social_media_demo/controller/global/app_con.dart';
-import 'package:social_media_demo/controller/global/lang_con.dart';
-import 'package:social_media_demo/controller/global/notify_con.dart';
-import 'package:social_media_demo/controller/global/obx_con.dart';
-import 'package:social_media_demo/core/services/my_services.dart';
-import 'package:social_media_demo/models/comments_model.dart';
-import 'package:social_media_demo/view/screens/media/video/videoscreen.dart';
+import 'package:sm_project/controller/global/app_con.dart';
+import 'package:sm_project/controller/global/lang_con.dart';
+import 'package:sm_project/controller/global/notify_con.dart';
+import 'package:sm_project/controller/global/obx_con.dart';
+import 'package:sm_project/core/const/colors.dart';
+import 'package:sm_project/models/comments_model.dart';
+import 'package:sm_project/view/screens/main/media/video/videoscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -63,15 +63,11 @@ class CommentsCon extends GetxController {
 
     Get.put(LangCon());
     Get.put(ObxCon());
-    MyServices myServices = Get.find();
-
     commRef = FirebaseFirestore.instance
         .collection('posts')
         .doc(postID)
         .collection('comments');
-    myServices.oneStream =
-        commRef.orderBy('date', descending: false).snapshots();
-    stream = myServices.oneStream!;
+    stream = commRef.orderBy('date', descending: false).snapshots();
   }
 
   formatDate({required CommentsModel commentsModel}) {
@@ -375,38 +371,35 @@ class CommentsCon extends GetxController {
                         File(thumbnail!),
                         fit: BoxFit.contain,
                       ),
-                      Container(
-                        width: 60,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.6),
-                              spreadRadius: -2,
-                              blurRadius: 0,
-                              offset: const Offset(1, 1),
-                            ),
-                          ],
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.play_arrow,
-                            color: Colors.white,
-                            size: 40,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                child: Text(
-                  'Send Video',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+              Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(5, 0, 10, 0),
+                    child: Text(
+                      'Send Video',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.remove_circle_outlined),
+                    onPressed: () {
+                      bottomWid = const SizedBox();
+                      uploadingCommentVid = null;
+                      uploadingCommentImage = null;
+                      pickedvid = null;
+                      vidUrl = null;
+                      vid = null;
+                      addImagePath = null;
+                      pickedimageUpload = null;
+                      imageUrl = null;
+                      update();
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -423,13 +416,57 @@ class CommentsCon extends GetxController {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedimageAdd != null) {
       uploadingCommentVid = null;
-
       pickedvid = null;
       vidUrl = null;
       vid = null;
       uploadingCommentImage = true;
       addImagePath = pickedimageAdd.path;
       pickedimageUpload = pickedimageAdd;
+      bottomWid = SizedBox(
+        height: 50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Image.file(
+                  File(
+                    addImagePath.toString(),
+                  ),
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(5, 0, 10, 0),
+                  child: Text('Send Image',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.remove_circle_outlined),
+                  onPressed: () {
+                    bottomWid = const SizedBox();
+                    uploadingCommentVid = null;
+                    uploadingCommentImage = null;
+                    pickedvid = null;
+                    vidUrl = null;
+                    vid = null;
+                    addImagePath = null;
+                    pickedimageUpload = null;
+                    imageUrl = null;
+                    update();
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+      update();
     }
   }
 
@@ -461,19 +498,19 @@ class CommentsCon extends GetxController {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(color: Colors.black),
+                      borderSide: const BorderSide(color: AppColors.black),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(color: Colors.black),
+                      borderSide: const BorderSide(color: AppColors.black),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(color: Colors.black),
+                      borderSide: const BorderSide(color: AppColors.black),
                     ),
                     label: const Text(
                       'Comment',
-                      style: TextStyle(fontSize: 15, color: Colors.black),
+                      style: TextStyle(fontSize: 15, color: AppColors.black),
                     ),
                     hintText: "....",
                   ),
@@ -488,8 +525,8 @@ class CommentsCon extends GetxController {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.black,
+                  backgroundColor: AppColors.black,
+                  foregroundColor: AppColors.black,
                   elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -512,7 +549,7 @@ class CommentsCon extends GetxController {
                 },
                 child: const Text(
                   'Confirm',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: AppColors.white),
                 ),
               ),
             ),

@@ -1,6 +1,6 @@
-import 'package:social_media_demo/controller/posts/posts_con.dart';
-import 'package:social_media_demo/models/post_model.dart';
-import 'package:social_media_demo/view/screens/main/posts/comments.dart';
+import 'package:sm_project/controller/posts/posts_con.dart';
+import 'package:sm_project/models/post_model.dart';
+import 'package:sm_project/view/screens/main/posts/comments.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

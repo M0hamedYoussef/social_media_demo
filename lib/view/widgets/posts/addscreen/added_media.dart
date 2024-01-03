@@ -1,4 +1,4 @@
-import 'package:social_media_demo/controller/posts/posts_con.dart';
+import 'package:sm_project/controller/posts/posts_con.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
